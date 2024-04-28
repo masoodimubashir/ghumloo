@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- FAV ICON -->
-    <link rel="shortcut icon" href="images/fav.ico">
+    <link rel="shortcut icon" href="{{asset('Logo/logo.png')}}">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Poppins%7CQuicksand:400,500,700" rel="stylesheet">
     <!-- FONT-AWESOME ICON CSS -->
@@ -18,11 +18,21 @@
     <link rel="stylesheet" href="{{ asset('old/css/mob.css') }}">
     <link rel="stylesheet" href="{{ asset('old/css/animate.css') }}">
     <!-- <script src="js/html5shiv.js"></script>-->
-    {{-- <script src="js/respond.min.js"></script>--}}
+    {{--         <script src="js/respond.min.js"></script>--}}
     <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="{{asset('old/css/custom.css')}}">
+
 </head>
 
 <body>
+
 <!-- Preloader -->
 <div id="preloader">
     <div id="status">&nbsp;</div>
@@ -128,9 +138,10 @@
                 <div class="col-md-12">
                     <div class="ed-com-t1-left">
                         <ul>
-                            <li><a href="#">Contact: Lake Road, Suite 180 Farmington Hills, U.S.A.</a>
+                            <li>
+                                <a href="mailto:booking@ghumloo.com">Online Support: booking@ghumloo.com</a>
                             </li>
-                            <li><a href="#">Phone: +101-1231-1231</a>
+                            <li><a href="tel:+91 9289 030 404">Free Call: +91 9289 030 404</a>
                             </li>
                         </ul>
                     </div>
@@ -157,11 +168,14 @@
                     </div>
                     <div class="ed-com-t1-social">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -188,110 +202,10 @@
                             </li>
                             <li class="about-menu">
                                 <a href="{{ route('front.packages') }}" class="mm-arr">Packages</a>
-                                <!-- MEGA MENU 1 -->
-                                <div class="mm-pos">
-                                    <div class="about-mm m-menu">
-                                        <div class="m-menu-inn">
-                                            <div class="mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay menu-about" href="all-package.html">
-                                                        <img src="images/sight/5.jpg" alt="">
-                                                        <span>Popular Package</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="mm1-com mm1-s2">
-                                                <p>Want to change the world? At Berkeley we’re doing just that. When
-                                                    you join the Golden Bear community, you’re part of an
-                                                    institution that shifts the global conversation every single
-                                                    day.</p>
-                                                <a href="all-package.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm1-com mm1-s3">
-                                                <ul>
-                                                    <li><a href="booking-all.html">All Booking</a></li>
-                                                    <li><a href="booking-tour-package.html">Tour Package
-                                                            Booking</a></li>
-                                                    <li><a href="booking-hotel.html">Hotel Booking</a></li>
-                                                    <li><a href="booking-car-rentals.html">Car Rentals Booking</a>
-                                                    </li>
-                                                    <li><a href="booking-flight.html">Flight Booking</a></li>
-                                                    <li><a href="booking-slider.html">Slider Booking</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="mm1-com mm1-s4">
-                                                <ul>
-                                                    <li><a href="all-package.html">All Package</a></li>
-                                                    <li><a href="family-package.html">Family Package</a></li>
-                                                    <li><a href="honeymoon-package.html">Honeymoon Package</a></li>
-                                                    <li><a href="group-package.html">Group Package</a></li>
-                                                    <li><a href="weekend-package.html">WeekEnd Package</a></li>
-                                                    <li><a href="regular-package.html">Regular Package</a></li>
-                                                    <li><a href="custom-package.html">Custom Package</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li class="admi-menu">
-                                <a href="{{route('front.seight-seeing')}}" class="mm-arr">Seight Seeing</a>
+                                <a href="{{route('front.seight-seeing')}}" class="mm-arr">Sight Seeing</a>
                                 <!-- MEGA MENU 1 -->
-                                <div class="mm-pos">
-                                    <div class="admi-mm m-menu">
-                                        <div class="m-menu-inn">
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="destinations.html">
-                                                        <img src="images/sight/1.jpg" alt="">
-                                                        <span>Seight Seeing - 1</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros.
-                                                    Vestibulum congue nec eros quis lacinia. Mauris non tincidunt
-                                                    lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="destinations.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="places-1.html">
-                                                        <img src="images/sight/2.jpg" alt="">
-                                                        <span>Seight Seeing - 2</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros.
-                                                    Vestibulum congue nec eros quis lacinia. Mauris non tincidunt
-                                                    lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="places-1.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s1">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="places-2.html">
-                                                        <img src="images/sight/3.jpg" alt="">
-                                                        <span>Seight Seeing - 3</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros.
-                                                    Vestibulum congue nec eros quis lacinia. Mauris non tincidunt
-                                                    lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="places-2.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-                                            <div class="mm2-com mm1-com mm1-s4">
-                                                <div class="ed-course-in">
-                                                    <a class="course-overlay" href="places-3.html">
-                                                        <img src="images/sight/4.jpg" alt="">
-                                                        <span>Seight Seeing - 4</span>
-                                                    </a>
-                                                </div>
-                                                <p>Donec lacus libero, rutrum ac sollicitudin sed, mattis non eros.
-                                                    Vestibulum congue nec eros quis lacinia. Mauris non tincidunt
-                                                    lectus. Nulla mollis, orci vitae accumsan rhoncus.</p>
-                                                <a href="places-3.html" class="mm-r-m-btn">Read more</a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                             <li><a href="{{ route('front.hotels') }}">Hotels</a></li>
                             <!--<li><a class='dropdown-button ed-sub-menu' href='#' data-activates='dropdown1'>Courses</a></li>-->
@@ -387,8 +301,7 @@
                                     </div>
                                 </div>
                             </li> --}}
-                            <li><a href="dashboard.html">Profile</a>
-                            </li>
+
                             <li>
                                 <a href="{{ route('front.contactus') }}">Contact us</a>
                             </li>
@@ -397,10 +310,14 @@
                     <div class="al">
                         @if(session('user'))
                             <div class="head-pro pop-ini" data-pop="pop-advi">
-                                <img src="images/1.jpg" alt="" loading="lazy">
+                                @if(session('user')->image)
+                                    <img src="{{asset('storage/' . session('user')->image)}}" alt="" loading="lazy">
+                                @else
+                                    <img src="{{asset('Logo/placeholder.jpg')}}" alt="" loading="lazy">
+                                @endif
                                 <div>
                                     <b>{{session('user')->name}}</b>
-                                    {{--                                        <h4>Ashley emyy</h4>--}}
+                                    <h4>{{session('user')->email}}</h4>
                                 </div>
                                 <span class="fclick"></span>
                             </div>
@@ -623,43 +540,8 @@
         <div class="footer1 home_title tb-space">
             <div class="pla1 container">
                 <!-- FOOTER OFFER 1 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="disco">
-                        <h3>30%<span>OFF</span></h3>
-                        <h4>Eiffel Tower,Rome</h4>
-                        <p>valid only for 24th Dec</p> <a href="booking.html">Book Now</a>
-                    </div>
-                </div>
                 <!-- FOOTER OFFER 2 -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="disco1 disco">
-                        <h3>42%<span>OFF</span></h3>
-                        <h4>Colosseum,Burj Al Arab</h4>
-                        <p>valid only for 18th Nov</p> <a href="booking.html">Book Now</a>
-                    </div>
-                </div>
                 <!-- FOOTER MOST POPULAR VACATIONS -->
-                <div class="col-md-6 col-sm-12 col-xs-12 foot-spec footer_places">
-                    <h4><span>Most Popular</span> Vacations</h4>
-                    <ul>
-                        <li><a href="tour-details.html">Angkor Wat</a></li>
-                        <li><a href="tour-details.html">Buckingham Palace</a></li>
-                        <li><a href="tour-details.html">High Line</a></li>
-                        <li><a href="tour-details.html">Sagrada Família</a></li>
-                        <li><a href="tour-details.html">Statue of Liberty </a></li>
-                        <li><a href="tour-details.html">Notre Dame de Paris</a></li>
-                        <li><a href="tour-details.html">Taj Mahal</a></li>
-                        <li><a href="tour-details.html">The Louvre</a></li>
-                        <li><a href="tour-details.html">Tate Modern, London</a></li>
-                        <li><a href="tour-details.html">Gothic Quarter</a></li>
-                        <li><a href="tour-details.html">Table Mountain</a></li>
-                        <li><a href="tour-details.html">Bayon</a></li>
-                        <li><a href="tour-details.html">Great Wall of China</a></li>
-                        <li><a href="tour-details.html">Hermitage Museum</a></li>
-                        <li><a href="tour-details.html">Yellowstone</a></li>
-                        <li><a href="tour-details.html">Musée d'Orsay</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -673,46 +555,35 @@
                     <div>
                         <div class="row">
                             <div class="col-sm-3 foot-spec foot-com">
-                                <h4><span>Holiday</span> Tour & Travels</h4>
-                                <p>World's leading tour and travels Booking website,Over 30,000 packages worldwide.
-                                </p>
+                                <img alt="{{asset('Logo/logo.png')}}" src="{{asset('Logo/logo.png')}}"></img>
+
                             </div>
                             <div class="col-sm-3 foot-spec foot-com">
                                 <h4><span>Address</span> & Contact Info</h4>
-                                <p>28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A. Landmark : Next To
-                                    Airport</p>
-                                <p><span class="strong">Phone: </span> <span
-                                        class="highlighted">+101-1231-1231</span></p>
+                                <p>Golden Palm, Sector 168,
+                                    Noida, Uttar Pradesh 201307.</p>
+                                <p><span class="strong"> </span> <span
+                                        class="highlighted">+91 9289 030 404 <br> +91 9560 690 202</span></p>
                             </div>
                             <div class="col-sm-3 col-md-3 foot-spec foot-com">
                                 <h4><span>SUPPORT</span> & HELP</h4>
                                 <ul class="two-columns">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">FAQ</a></li>
                                     <li><a href="#">Feedbacks</a></li>
-                                    <li><a href="#">Blog </a></li>
-                                    <li><a href="#">Use Cases</a></li>
-                                    <li><a href="#">Advertise us</a></li>
-                                    <li><a href="#">Discount</a></li>
-                                    <li><a href="#">Vacations</a></li>
-                                    <li><a href="#">Branding Offers </a></li>
                                     <li><a href="#">Contact Us</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-3 foot-social foot-spec foot-com">
                                 <h4><span>Follow</span> with us</h4>
-                                <p>Join the thousands of other There are many variations of passages of Lorem Ipsum
-                                    available</p>
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <li><a href="#"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-google-plus"
+                                    <li><a href="#"><i class="fa-brands fa-google-plus"
                                                        aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <li><a href="#"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <li><a href="#"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
                                     </li>
-                                    <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                    <li><a href="#"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -722,6 +593,7 @@
             </div>
         </div>
     </div>
+
 </section>
 <!--====== FOOTER - COPYRIGHT ==========-->
 <section>
@@ -730,7 +602,9 @@
             <p>Copyrights © 2023 Company Name. All Rights Reserved</p>
         </div>
     </div>
+
 </section>
+
 {{-- <section>
     <div class="icon-float">
         <ul>
@@ -754,6 +628,7 @@
 <script src="{{ asset('old/js/select-opt.js') }}"></script>
 <script src="{{ asset('old/js/slick.js') }}"></script>
 <script src="{{ asset('old/js/custom.js') }}"></script>
+{{----}}
 <script>
     $('.multiple-items').slick({
         dots: true,
@@ -771,7 +646,7 @@
                 centerMode: false,
             }
         }]
-
+//
     });
     $('.slider-all').slick({
         dots: true,
@@ -788,7 +663,7 @@
                 centerMode: false,
             }
         }]
-
+//
     });
 </script>
 

@@ -48,13 +48,12 @@ class Hotel extends Model
 
 	public function propertyType(): BelongsTo
 	{
-		return $this->belongsTo(PropertyType::class);
+		return $this->belongsTo(PropertyType::class, 'property_type_id');
 	}
 
-
-    public function states(): BelongsToMany
+    public function reviews()
     {
-        return $this->belongsToMany(State::class);
+        return $this->morphMany(Review::class, 'reviewable');
     }
 
     public function city(): BelongsTo

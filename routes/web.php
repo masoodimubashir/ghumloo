@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\StayController;
 use App\Http\Controllers\Admin\UpdateHotelPopularityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorController;
+use App\Http\Controllers\Front\FrontendReviewController;
 use App\Http\Controllers\Front\FrontEndViewsController;
 use App\Http\Controllers\User\SocialiteController;
 use App\Http\Controllers\User\UpdatePasswordController;
@@ -43,12 +44,6 @@ use App\Http\Controllers\Vendor\VendorSettingsController;
 use Illuminate\Support\Facades\Route;
 
 
-//Route::get('/mail-send', function () {
-//
-//    dd(config('app.debug'));
-//
-//
-//});
 
 
 // ------------------------- Front View ---------------------------------------
@@ -57,12 +52,12 @@ Route::get('/', [FrontEndViewsController::class, 'index'])->name('front.home');
 Route::get('/contact', [FrontEndViewsController::class, 'contactus'])->name('front.contactus');
 Route::get('/all-packages', [FrontEndViewsController::class, 'packages'])->name('front.packages');
 Route::get('/all-hotels', [FrontEndViewsController::class, 'hotels'])->name('front.hotels');
-Route::get('/hotel-detail', [FrontEndViewsController::class, 'hoteldetail'])->name('front.hotel-detail');
-Route::get('/package-detail', [FrontEndViewsController::class, 'packagedetail'])->name('front.package-detail');
-Route::get('/seight-seeing', [FrontEndViewsController::class, 'seightseeing'])->name('front.seight-seeing');
+Route::get('/hotel-detail/{id}', [FrontEndViewsController::class, 'hoteldetail'])->name('front.hotel-detail');
+Route::get('package/{id}', [FrontEndViewsController::class, 'packagedetail'])->name('front.package-detail');
+Route::get('/sight-seeing', [FrontEndViewsController::class, 'seightseeing'])->name('front.seight-seeing');
+Route::get('/search', [FrontEndViewsController::class, 'search'])->name('front.search');
 
-
-//----------------------------  User ---------------------------------
+//----------------------------  User ------------------------------------------
 
 
 Route::get('/user/view-login', [UserAuthController::class, 'viewSignin'])->name('user.view-login');
@@ -82,6 +77,7 @@ Route::get('reset-password/{token}', [UserAuthController::class, 'showResetPassw
 Route::post('reset-password', [UserAuthController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 
+
 Route::group(['prefix' => 'user', 'middleware' => 'App\Http\Middleware\isUser'], function () {
 
     Route::get('/view-profile', [UserProfileController::class, 'profile'])->name('user.view-profile');
@@ -90,12 +86,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'App\Http\Middleware\isUser'],
     Route::get('/verify-phone', [VerifyPhoneController::class, 'verifyPhone'])->name('user.verify-phone');
     Route::put('update-image', [UserProfileController::class, 'updateImage'])->name('update.image');
     Route::get('/dashboard', [UserDashboardController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/verify-aadhaar', [UserAuthController::class, 'verifyAdhar'])->name('user.verify-aadhaar');
 
-    Route::get('update-password-view', [UpdatePasswordController::class, 'updatedPasswordView'])
-        ->name('user.update-password-view');
-    Route::put('update-password', [UpdatePasswordController::class, 'updatePassword'])
-        ->name('password-update');
-
+    Route::get('update-password-view', [UpdatePasswordController::class, 'updatedPasswordView'])->name('user.update-password-view');
+    Route::put('update-password', [UpdatePasswordController::class, 'updatePassword'])->name('password-update');
 
     Route::get('/change-password', [UserAuthController::class, 'changepassword'])->name('user.view-change-password');
     Route::get('/event-booking', [UserAuthController::class, 'eventbooking'])->name('user.view-event-booking');
@@ -104,6 +98,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'App\Http\Middleware\isUser'],
     Route::get('/payments', [UserAuthController::class, 'payments'])->name('user.view-payments');
     Route::get('/view-claimrefund', [UserAuthController::class, 'claimrefund'])->name('user.view-claimrefund');
     Route::get('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+
+    Route::post('package/review/{id}', [FrontendReviewController::class, 'packageReview'])
+        ->name('user.package-review');
+    Route::post('hotel/review/{id}', [FrontendReviewController::class, 'hotelReview'])
+        ->name('user.hotel-review');
+
 });
 
 
@@ -122,8 +122,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\isAdmin'
     Route::resource('/coupon-code', CouponCodeController::class);
     Route::resource('/coupon', CouponController::class);
     Route::resource('/hotel', HotelController::class);
-    Route::put('/update-hotel-popularity/{id}', UpdateHotelPopularityController::class)
-        ->name('update-hotel-popularity');
+    Route::put('/update-hotel-popularity/{id}', UpdateHotelPopularityController::class)->name('update-hotel-popularity');
     Route::resource('/location', LocationController::class);
     Route::resource('/state', StateController::class);
     Route::resource('/city', CityController::class);
@@ -143,9 +142,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'App\Http\Middleware\isAdmin'
     Route::resource('/rejected-vendor', RejectedVendorController::class);
 //    Route::get('/hotel/{id}', [FetchDetailsController::class, 'fetchHotel'])->name('hotels-fetch');
 
-    Route::get('/update-status/{id}', [StatusUpdateController::class, 'updateStatus'])
-        ->name('vendor-update.status');
-
+    Route::get('/update-status/{id}', [StatusUpdateController::class, 'updateStatus'])->name('vendor-update.status');
 
 });
 
@@ -158,9 +155,7 @@ Route::post('/vendor/register-vendor', [VendorAuthController::class, 'registerVe
 
 Route::group(['prefix' => 'vendor', 'middleware' => 'App\Http\Middleware\isVendor'], function () {
 
-
     Route::get('/logout', [VendorAuthController::class, 'logout'])->name('vendor.logout');
-
     Route::get('/dashboard', [VendorAuthController::class, 'index'])->name('vendor.dashboard');
 
     Route::resource('/vendor-hotel', VendorHotelController::class);

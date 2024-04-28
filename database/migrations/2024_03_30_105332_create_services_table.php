@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('service')->unique();
-            $table->longText('icon');
+//            $table->longText('icon');
             $table->enum('status', ['0', '1'])->default('0');
             $table->string('slug');
             $table->timestamps();

@@ -18,6 +18,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Email Verified</th>
+                                <th>Aadhaar Details</th>
                                 <th>Address & Contact Details</th>
                                 <th>Delete</th>
                             </tr>
@@ -38,40 +39,18 @@
                                     <td>
                                         {{$user->email_verified_at}}
                                     </td>
-{{--                                    <td>--}}
-{{--                                        Email: {{$user->email}} <br>--}}
-{{--                                        <hr>--}}
-{{--                                        Phone One: {{$user->phone_one}} <br>--}}
-{{--                                        <hr>--}}
-{{--                                        Phone Two: {{$user->phone_two}}--}}
-{{--                                    </td>--}}
-
                                     <td>
-                                        <form id="updateForm{{$user->id}}"
-                                              action="{{ route('hotel.update', [base64_encode($user->id)]) }}"
-                                              method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            @if($user->active_by_admin === 1)
-                                                <a
-                                                    href="#"
-                                                    onclick="event.preventDefault();
-                                                           document.getElementById('updateForm{{$user->id}}').submit();"
-                                                >
-                                                    <div class="badge badge-warning">Deactivate</div>
-                                                </a>
-                                            @else
-                                                <a
-                                                    href="#"
-                                                    onclick="event.preventDefault();
-                                                           document.getElementById('updateForm{{$user->id}}').submit();"
-                                                >
-                                                    <div class="badge badge-success">Activate</div>
-                                                </a>
-                                            @endif
-                                        </form>
+                                        @if($user->adhar_verified_at === null)
+                                            <strong class="text-danger">Not Verified</strong>
+                                        @else
+                                            <strong class="text-success">Verified</strong>
+                                        @endif <br> <hr>
+                                        State: {{$user->aadhaar->state}} <br> <hr>
+                                        Phone: {{$user->aadhaar->phone ? $user->aadhaar->phone : 'Not available'}}
                                     </td>
-
+                                    <td>
+                                        Phone: {{$user->phone  ?? 'Not Available ' }}
+                                    </td>
                                     <td>
                                         <form id="deleteForm{{$user->id}}"
                                               action="{{ route('hotel.destroy', [base64_encode($user->id)]) }}"

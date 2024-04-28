@@ -21,6 +21,7 @@ class Admin extends Model
         'image'
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *

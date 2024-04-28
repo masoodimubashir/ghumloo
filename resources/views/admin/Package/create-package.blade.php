@@ -53,6 +53,7 @@
                             <div class="col-md-2 form-group">
                                 <label for="state_id0001">Select State</label>
                                 <select
+
                                     class="form-select"
                                     id="state_id0001"
                                     onchange="fetchCities('state_id0001','city_id0001')"
@@ -384,7 +385,7 @@
                 type: 'GET',
                 success: function (response) {
 
-                    $(`#${city_id}`).html(response).prop('disabled', false);
+                    $(`#${city_id}`).html(response).prop('disabled', false).append(`<option>Select City</option>`);
 
                     response.forEach(function (city) {
 

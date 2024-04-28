@@ -51,8 +51,8 @@
                                             <table>
                                                 <thead>
                                                 <th>Hotel Name</th>
-                                                <th>Stay Period</th>
                                                 <th>Price Per Stay</th>
+                                                <th>Stay Period</th>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($package->hotels as $hotel)

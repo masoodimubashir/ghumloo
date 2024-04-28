@@ -68,13 +68,11 @@ class VendorAuthController extends Controller
 
         $user = Vendor::whereEmail($request->email)->first();
 
-
         if (!$user) {
             return back()->withErrors([
                 'error' => 'Please Register As New User',
             ]);
         }
-
 
         if (!$user->status === '0' || !Hash::check($data['password'], $user->password)) {
             return back()->withErrors([

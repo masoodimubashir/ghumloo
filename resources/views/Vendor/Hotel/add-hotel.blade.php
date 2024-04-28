@@ -48,7 +48,7 @@
                                         @endforeach
                                     @endif
                                 </select>
-                                @error('hotel_name')
+                                @error('room_id')
                                 {{ $message }}
                                 @enderror
                             </div>
@@ -158,32 +158,31 @@
                             <div class="col-md-6">
                                 <label for="check_in">Check In</label>
                                 <input
-                                    type="date"
-                                    id="check_in"
-                                    value="{{old('check_in')}}"
-                                    name="check_in"
-                                    class="form-control pb-4"
-
+                                    type="time"
+                                id="check_in"
+                                value="{{old('check_in')}}"
+                                name="check_in"
+                                class="form-control pb-4"
                                 >
                                 @error('check_in')
                                 {{ $message }}
                                 @enderror
                             </div>
-                            <div class="col-md-6 ">
+                            <div class="col-md-6">
                                 <label for="check_out">Check Out</label>
                                 <input
-                                    type="date"
-                                    id="check_out"
-                                    value="{{old('check_out')}}"
-                                    name="check_out"
-                                    class="form-control pb-4"
-
+                                    type="time"
+                                id="check_out"
+                                value="{{old('check_out')}}"
+                                name="check_out"
+                                class="form-control pb-4"
                                 >
                                 @error('check_out')
                                 {{ $message }}
                                 @enderror
                             </div>
                         </div>
+
 
                         <br/>
 
@@ -226,10 +225,10 @@
                                        name="longitude" value="{{ old('longitude') }}"/>
                                 <input type="hidden" id="latitude" class="form-control "
                                        name="latitude" value="{{ old('latitude') }}"/>
-                                {{--                        <div class="col-sm-12">--}}
-                                {{--                            <div id="googleMap" style="width:100%;height:400px;"></div>--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div id="googleMap" style="width:100%;height:400px;"></div>--}}
 
-                                {{--                        </div>--}}
+{{--                                                        </div>--}}
 
                             </div>
 

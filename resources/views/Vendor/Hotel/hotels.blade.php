@@ -31,7 +31,7 @@
                             <tbody>
                             @foreach($hotels as $hotel)
                                 @php
-                                    $images = json_decode($hotel->images)
+                                    $images = explode(',' , $hotel->images)
                                 @endphp
                                 <tr>
                                     <td>
@@ -52,17 +52,7 @@
                                         <small>Email: {{$hotel->email}}</small>
                                         <br>
                                         <small>
-                                            Address:
-                                            <br>
-{{--                                            @foreach($hotel->locations as $hotel_location)--}}
-{{--                                                {{$hotel_location->country}},--}}
-{{--                                                {{$hotel_location->city}},--}}
-{{--                                                {{$hotel_location->state}},--}}
-{{--                                                <br>--}}
-{{--                                            @endforeach--}}
-
-                                            {{$hotel->address}}
-                                            Address:
+                                            Address:{{$hotel->search_area}}
                                             <br>
                                             Phone One : {{$hotel->phone_one}}
                                             <br>

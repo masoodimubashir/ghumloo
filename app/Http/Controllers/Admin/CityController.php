@@ -16,9 +16,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cites = City::with('state')->orderBy('city')->paginate(10);
+        $states_with_cities = State::has('cities')->orderBy('state')->paginate(10);
         $states = State::where('status', 1)->orderBy('state')->get();
-        return view('admin.City.city', compact('cites', 'states'));
+        return view('admin.City.city', compact('states', 'states_with_cities'));
     }
 
     /**

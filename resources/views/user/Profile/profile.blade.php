@@ -14,6 +14,12 @@
                     </strong>
                 @endif
 
+                @if(session('error'))
+                    <strong class="text-danger">
+                        {{session('error')}}
+                    </strong>
+                @endif
+
                 <form action="{{route('update.image')}}" method="POST" enctype="multipart/form-data"
                       class="text-center">
                     @method('PUT')
@@ -44,7 +50,7 @@
                         <div class="col-md-6">
                             <label for="name">Name</label>
                             <input type="text"
-                                   value="{{session('user')->name}}"
+                                   value="{{auth()->user()->name}}"
                                    name="name"
                                    class="form-control"
                                    placeholder="Name">
@@ -64,7 +70,6 @@
                                 placeholder="Email"
                                 readonly
                             >
-
                             @if(session('user')->email_verified_at === Null)
                                 <small class="text-warning">We strongly recommend you to
                                     <a href="{{route('verify-auth-user-verifyEmail')}}">Verify Your Email</a>
@@ -79,52 +84,64 @@
                             @enderror
                         </div>
                     </div>
-                    <br>
-                    <div>
-                        <div>
-                            <label for="phone">Phone Number</label>
-                            <input
-                                type="number"
-                                value="{{session('user')->phone}}"
-                                name="phone"
-                                class="form-control"
-                                placeholder="Phone"
-                                min="0"
-                            >
-                            @error('phone')
-                            {{ $message }}
-                            @enderror
-                            @if(session('user')->phone === null)
-                                <small class="text-warning">
-                                    <a href="{{route('user.verify-phone')}}">Verify Your Number</a>
-                                </small>
-                            @endif
-                        </div>
-
-                        {{--                       <div class="col-md-6">--}}
-                        {{--                           <label for="whatsapp">Whatsapp Number</label>--}}
-                        {{--                           <input--}}
-                        {{--                               type="number"--}}
-                        {{--                               value="{{session('user')->whatsapp}}"--}}
-                        {{--                               name="whatsapp"--}}
-                        {{--                               class="form-control"--}}
-                        {{--                               placeholder="Phone"--}}
-                        {{--                               min="0"--}}
-                        {{--                           >--}}
-                        {{--                           @error('whatsapp')--}}
-                        {{--                               {{ $message }}--}}
-                        {{--                           @enderror--}}
-                        {{--                           @if(session('user')->whatsapp === null)--}}
-                        {{--                               <small class="text-warning">--}}
-                        {{--                                   <a href="">Verify Your Number</a>--}}
-                        {{--                               </small>--}}
-                        {{--                           @endif--}}
-                        {{--                       </div>--}}
-                    </div>
-
-                    <input type="submit" value="Update Profile" class="btn btn-lg btn-primary">
+                    <input type="submit" value="Update Profile"
+                           style="border: 1px solid gray; padding: 5px; border-radius: 5px;">
 
                 </form>
+                    <br>
+
+                    <div class="row">
+                        <form>
+
+                            <div class="col-md-6">
+                                <label for="phone">Phone Number</label>
+                                <input
+                                    type="number"
+                                    value="{{auth()->user()->phone}}"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Phone"
+                                    min="0"
+                                >
+                                @error('phone')
+                                {{ $message }}
+                                @enderror
+                                <br>
+                                @if(session('user')->phone === null)
+                                    <small class="text-warning">
+                                        <a href="{{route('user.verify-phone')}}">Verify Your Number</a>
+                                    </small>
+                                @endif
+                            </div>
+                        </form>
+                        <form action="{{route('user.verify-aadhaar')}}" method="POST">
+                            @csrf
+                            <div class="col-md-6">
+                                @error('aadhaar')
+                                <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
+                                <br>
+                                <label for="whatsapp">Aadhaar Number</label>
+                                <input
+                                    type="text"
+                                    value="{{auth()->user()->aadhaar->aadhaar_number}}"
+                                    name="aadhaar"
+                                    class="form-control"
+                                    placeholder="Aadhaar"
+                                    min="0"
+                                >
+
+                                <br>
+                                @if(auth()->user()->adhar_verified_at === null)
+                                    <button type="submit" style="border:none; padding: 2px; background: none;"
+                                            class="text-warning">
+                                        Verify Your Aadhaar
+                                    </button>
+                                @endif
+                            </div>
+                        </form>
+
+                    </div>
             </div>
         </div>
     </div>

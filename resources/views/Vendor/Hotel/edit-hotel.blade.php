@@ -161,7 +161,7 @@
                             <div class="col-md-6">
                                 <label for="check_in">Check In</label>
                                 <input
-                                    type="date"
+                                    type="time"
                                     id="check_in"
                                     value="{{$hotel->check_in}}"
                                     name="check_in"
@@ -175,7 +175,7 @@
                             <div class="col-md-6 ">
                                 <label for="check_out">Check Out</label>
                                 <input
-                                    type="date"
+                                    type="time"
                                     id="check_out"
                                     value="{{$hotel->check_out}}"
                                     name="check_out"

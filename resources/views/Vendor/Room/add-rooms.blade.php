@@ -36,7 +36,7 @@
                                 <input
                                     name="room_number"
                                     min="0"
-                                    type="number"
+                                    type="text"
                                     placeholder="Room Number..."
                                     class="form-control"
                                     value="{{old('room_number')}}"
@@ -175,7 +175,7 @@
                         <h4>Rate Plan</h4>
                         <div class="row form-group">
 
-                            <div class="col-md-6 ">'
+                            <div class="col-md-4 ">'
                                 <label>Price Per Night</label>
                                 <input
                                     name="price_per_night"
@@ -186,38 +186,6 @@
                                     value="{{old('price_per_night')}}"
                                 >
                                 @error('price_per_night')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label>Discount</label>
-                                <input
-                                    name="discount_price"
-                                    min="0"
-                                    type="number"
-                                    placeholder="Discount"
-                                    class="form-control"
-                                    value="{{old('discount_price')}}"
-                                >
-                                @error('discount_price')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        <div class="row form-group">
-
-                            <div class="col-md-4 ">
-                                <label>Tax</label>
-                                <input
-                                    name="tax"
-                                    type="number"
-                                    placeholder="Tax @ 10%"
-                                    class="form-control"
-                                    value="{{old('tax')}}"
-                                >
-                                @error('tax')
                                 {{ $message }}
                                 @enderror
                             </div>
@@ -249,6 +217,39 @@
                                 {{ $message }}
                                 @enderror
                             </div>
+{{--                            <div class="col-md-6">--}}
+{{--                                <label>Discount</label>--}}
+{{--                                <input--}}
+{{--                                    name="discount_price"--}}
+{{--                                    min="0"--}}
+{{--                                    type="number"--}}
+{{--                                    placeholder="Discount"--}}
+{{--                                    class="form-control"--}}
+{{--                                    value="{{old('discount_price')}}"--}}
+{{--                                >--}}
+{{--                                @error('discount_price')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+                        </div>
+
+
+                        <div class="row form-group">
+
+{{--                            <div class="col-md-4 ">--}}
+{{--                                <label>Tax</label>--}}
+{{--                                <input--}}
+{{--                                    name="tax"--}}
+{{--                                    type="number"--}}
+{{--                                    placeholder="Tax @ 10%"--}}
+{{--                                    class="form-control"--}}
+{{--                                    value="{{old('tax')}}"--}}
+{{--                                >--}}
+{{--                                @error('tax')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+
                         </div>
 
 
@@ -298,25 +299,23 @@
 
                         <hr>
 
-                        <h4>Extra Services</h4>
-
-                        <div class="mt-4 p-3 rounded bg-secondary">
-
+                        <div class="mt-4 p-3 rounded bg-secondary gap-2 ">
+                            <h4>Extra Services</h4>
+                            <br>
                             @if($services->isNotEmpty())
                                 @foreach($services as $service)
-                                    <label>
-                                        {!! $service->icon !!}
+                                    <label class="bg-white p-2 rounded col-md-3 col-xl-2">
                                         <input type="checkbox" name="services[]" value="{{$service->id}}">
-                                        <span class="lever"></span>
+                                        {{$service->service}} &nbsp;
                                     </label>
                                 @endforeach
                             @endif
 
-                            @error('services')
-                            {{ $message }}
-                            @enderror
-
                         </div>
+
+                        @error('services')
+                        {{ $message }}
+                        @enderror
 
                         <div class="mt-4">
                             <label for="inputName">Overview</label>
@@ -335,16 +334,16 @@
                             @enderror
                         </div>
 
-
                         <div class="mt-4">
                             <label for="upload-input">Upload Images</label>
-                            <input type="file" name="images[]" id="upload-input"
+                            <input type="file" class="form-control" name="images[]" id="upload-input"
                                    multiple>
-
-                            @error('images[]')
+                            @error('images')
                             {{ $message }}
                             @enderror
                         </div>
+
+                        <br>
 
                         <input type="submit" class="btn btn-primary" value="submit">
                     </form>

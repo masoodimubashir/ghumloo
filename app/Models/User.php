@@ -24,8 +24,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'image',
         'googleId',
-        'email_verified_at'
+        'email_verified_at',
+        'adhar_verified_at'
     ];
+
+    public function aadhaar(): HasOne
+    {
+        return $this->hasOne(Aadhaar::class, 'user_id');
+    }
 
     public function passwordReset(): HasOne
     {

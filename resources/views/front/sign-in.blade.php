@@ -132,21 +132,10 @@
                 <div class="soc-login">
                     <h4>Sign in using</h4>
                     <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-facebook fb1"></i>
-                                Facebook
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-twitter tw1"></i>
-                                Twitter
-                            </a>
-                        </li>
+
                         <li>
                             <a href="{{route('social.redirect', ['google'])}}">
-                                <i class="fa fa-google-plus gp1"></i>
+                                <i class="fa-brands fa-google"></i>
                                 Google
                             </a>
                         </li>

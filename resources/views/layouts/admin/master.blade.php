@@ -390,7 +390,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-WwyCAZ5rJArnCELEtTalFrSBmcyLgk&libraries=places&v=weekly&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{config('services.GOOGLE_API_KEY')}}&libraries=places&v=weekly&callback=initMap">
 </script>
 <!-- <script src="../../assets/js/Chart.roundedBarCharts.js')}}"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>

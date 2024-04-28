@@ -79,9 +79,9 @@
                         <li>
                             <div id="imagePreview">
                                 @if(session('user')->image)
-                                    <img class="img" src="{{asset('storage/' . session('user')->image)}}" alt="Default Image">
+                                    <img class="" src="{{asset('storage/' . session('user')->image)}}" alt="Default Image">
                                 @else
-                                    <img class="img" src="{{asset('Logo/placeholder.jpg')}}"
+                                    <img class="" src="{{asset('Logo/placeholder.jpg')}}"
                                          alt="Default Image">
 
                                 @endif

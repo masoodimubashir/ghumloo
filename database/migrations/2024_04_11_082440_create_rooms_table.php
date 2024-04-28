@@ -15,18 +15,16 @@ return new class extends Migration {
             $table->foreignId('vendor_id')
                 ->constrained('vendors')
                 ->cascadeOnDelete();
-            $table->unsignedInteger('room_number')->unique();
+            $table->string('room_number')->unique();
             $table->string('room_name');
             $table->decimal('area');
             $table->unsignedInteger('max_persons')->default(0);
             $table->unsignedInteger('max_children')->default(0);
-            $table->unsignedTinyInteger('tax');
             $table->unsignedInteger('price_per_night')->default(0);
-            $table->unsignedInteger('discount_price')->default(0);
             $table->unsignedInteger('cancellation_in_days');
-            $table->json('services');
+            $table->string('services');
             $table->text('overview');
-            $table->json('images')->nullable();
+            $table->string('images')->nullable();
             $table->boolean('free_cancellation')->default(false);
             $table->boolean('lunch')->default(false);
             $table->boolean('dinner')->default(false);

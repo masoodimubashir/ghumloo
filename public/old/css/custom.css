@@ -1,0 +1,34 @@
+/*Hote And Package Stars*/
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.rating input {
+    display: none; /* Hide radio buttons visually */
+}
+
+.rating label {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.rating label:before {
+    content: "\f005";
+    color: lightgray;
+}
+
+.rating label:hover:before,
+.rating label:hover ~ label:before {
+    color: gold;
+}
+
+.rating input:checked ~ label:before {
+    color: orange;
+}
+
+.half:before {
+    content: "\f001"; /* Font Awesome half star icon code (optional) */
+}

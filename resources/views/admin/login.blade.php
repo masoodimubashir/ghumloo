@@ -40,6 +40,11 @@
                         <h6 class="fw-light">Sign In As Admin</h6>
                         <form class="pt-3" action="{{route('admin.store')}}" method="POST">
                             @csrf
+                            @if(session('error'))
+                                <div class="text-danger">
+                                    {{session('error')}}
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <input type="email" value="{{old('email')}}"
                                        class="form-control form-control-lg"

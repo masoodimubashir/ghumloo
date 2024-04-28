@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Package extends Model
 {
@@ -34,5 +36,9 @@ class Package extends Model
             'hotel_package',
             'package_id',
             'hotel_id')->withPivot('price_per_stay', 'stay_period');
+    }
+
+    public function reviews(): MorphMany{
+        return $this->morphMany(Review::class, 'reviewable');
     }
 }

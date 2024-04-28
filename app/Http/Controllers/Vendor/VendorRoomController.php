@@ -33,14 +33,12 @@ class VendorRoomController extends Controller
         $data = $request->validate([
             'room_type_id' => 'required|exists:room_types,id',
             'bed_id' => 'required|exists:bed_types,id',
-            'tax' => 'required|integer',
             'meal_type' => 'required|in:ep,ap,cp,map',
             'ac' => 'required|in:ac,no',
-            'room_number' => 'required|unique:rooms,room_number,id',
+            'room_number' => 'required|string|unique:rooms,room_number',
             'room_name' => 'required|string|max:255',
             'area' => 'required|numeric|min:0',
             'price_per_night' => 'required|numeric|min:0',
-            'discount_price' => 'nullable|numeric|min:0',
             'cancellation_in_days' => 'required|numeric|min:1|max:6',
             'services' => 'required|array',
             'services.*' => 'required|string|max:255',
@@ -48,11 +46,11 @@ class VendorRoomController extends Controller
             'max_persons' => 'required|numeric',
             'max_children' => 'required|numeric',
             'images' => 'sometimes|array',
-            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048'
+//            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg|max:1024'
         ]);
 
 
-        $encodedImages = [];
+        $room_images = [];
 
         if ($request->hasFile('images')) {
             $images = [];
@@ -62,15 +60,15 @@ class VendorRoomController extends Controller
                 $path = Storage::putFileAs('RoomImages', $image, $fileName);
                 $images[] = $path;
             }
-            $encodedImages = json_encode($images);
+            $room_images = implode(',', $images);
         }
 
-        $Services = [];
+        $room_services = [];
         foreach ($data['services'] as $service) {
-            $Services[] = $service;
+            $room_services[] = $service;
         }
 
-        $encodedServices = json_encode($Services);
+        $services = implode(',', $room_services);
 
         $room = Room::create([
             'vendor_id' => session('vendor')->id,
@@ -79,17 +77,15 @@ class VendorRoomController extends Controller
             'area' => $data['area'],
             'max_persons' => $data['max_persons'],
             'max_children' => $data['max_children'],
-            'ac' => $data['ac'],
-            'tax' => $data['tax'],
-            'price_per_night' => $data['price_per_night'],
-            'discount_price' => $data['discount_price'],
+            'price_per_night' => $request->price_per_night,
             'cancellation_in_days' => $data['cancellation_in_days'],
             'free_cancellation' => $request->has('free_cancellation') ? 1 : 0,
             'lunch' => $request->has('lunch') ? 1 : 0,
             'dinner' => $request->has('dinner') ? 1 : 0,
-            'services' => $encodedServices,
+            'breakfast' => $request->has('breakfast') ? 1 : 0,
+            'services' => $services,
             'overview' => $data['overview'],
-            'images' => $request->hasFile('images') ? $encodedImages : null,
+            'images' => $request->hasFile('images') ? $room_images : null,
         ]);
 
         $room->roomConfigurations()->create([
@@ -97,6 +93,7 @@ class VendorRoomController extends Controller
             'room_type_id' => $request->input('room_type_id'),
             'bed_id' => $request->input('bed_id'),
             'meal_type' => $request->input('meal_type'),
+            'ac' => $data['ac']
         ]);
 
         return redirect()->route('vendor-room.index')->with([
@@ -159,30 +156,26 @@ class VendorRoomController extends Controller
     public function update(Request $request, string $id)
     {
 
-
         $data = $request->validate([
             'room_type_id' => 'required|exists:room_types,id',
             'bed_id' => 'required|exists:bed_types,id',
-            'tax' => 'required|integer',
             'meal_type' => 'required|in:ep,ap,cp,map',
             'ac' => 'required|in:ac,no',
-            'room_number' => 'required', Rule::unique('rooms', 'room_number')->ignore($id),
+            'room_number' => 'required|string', Rule::unique('rooms', 'room_number')->ignore(base64_decode($id)),
             'room_name' => 'required|string|max:255',
             'area' => 'required|numeric|min:0',
             'price_per_night' => 'required|numeric|min:0',
-            'discount_price' => 'nullable|numeric|min:0',
             'cancellation_in_days' => 'required|numeric|min:1|max:6',
             'services' => 'required|array',
             'services.*' => 'required|string|max:255',
             'overview' => 'required|string',
             'max_persons' => 'required|numeric',
             'max_children' => 'required|numeric',
-            'images' => 'sometimes|array',
-            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048'
+//            'images' => 'sometimes|array',
+//            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $room = Room::find(base64_decode($id));
-
 
         if (!$room) {
             return redirect()->back()->withErrors([
@@ -192,9 +185,10 @@ class VendorRoomController extends Controller
 
         $encodedImages = [];
 
+
         if ($request->hasFile('images')) {
 
-            $old_images = json_decode($room->images);
+            $old_images = explode(',', $room->images);
 
             if ($old_images !== null) {
                 foreach ($old_images as $image) {
@@ -212,7 +206,7 @@ class VendorRoomController extends Controller
                 $path = Storage::putFileAs('RoomImages', $image, $fileName);
                 $images[] = $path;
             }
-            $encodedImages = json_encode($images);
+            $room_images = implode(',', $images);
         }
 
         $Services = [];
@@ -220,8 +214,7 @@ class VendorRoomController extends Controller
             $Services[] = $service;
         }
 
-        $encodedServices = json_encode($Services);
-
+        $room_services = implode(',' , $Services);
 
         $updated_room = $room->update([
             'room_number' => $data['room_number'],
@@ -229,16 +222,15 @@ class VendorRoomController extends Controller
             'area' => $data['area'],
             'max_persons' => $data['max_persons'],
             'max_children' => $data['max_children'],
-            'tax' => $data['tax'],
-            'price_per_night' => $data['price_per_night'],
-            'discount_price' => $data['discount_price'],
+            'price_per_night' => $request->price_per_night,
             'cancellation_in_days' => $data['cancellation_in_days'],
             'free_cancellation' => $request->has('free_cancellation') ? 1 : 0,
             'lunch' => $request->has('lunch') ? 1 : 0,
             'dinner' => $request->has('dinner') ? 1 : 0,
-            'services' => $encodedServices,
+            'breakfast' => $request->has('breakfast') ? 1 : 0,
+            'services' => $room_services,
             'overview' => $data['overview'],
-            'images' => $request->hasFile('images') ? $encodedImages : $room->images,
+            'images' => $request->hasFile('images') ? $room_images : $room->images,
         ]);
 
 

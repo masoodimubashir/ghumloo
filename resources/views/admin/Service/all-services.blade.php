@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-3 ">
-                        <h4 class="card-title col-md-10">Services</h4>
+                        <h4 class="card-title col-md-10">Facilities</h4>
                         <button
                             type="button"
                             id="myBtn"
@@ -21,7 +21,7 @@
                             <tr>
                                 <th>Service Type</th>
                                 <th>Status</th>
-                                <th>Icon</th>
+{{--                                <th>Icon</th>--}}
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -31,7 +31,9 @@
                                 @foreach($services as $service)
                                     <tr>
                                         <td>{{$service->service}}</td>
-                                        <td>{!!  $service->icon !!}</td>
+{{--                                        <td>--}}
+{{--                                            {!!  $service->icon !!}--}}
+{{--                                        </td>--}}
 
                                         <td>
                                             @if($service->status == 0)
@@ -101,10 +103,10 @@
                 <input type="text" class="form-control" id="service" placeholder="Service" name="service" required>
             </div>
 
-            <div class="form-floating">
-                <textarea class="form-control" placeholder="Icon" id="icon" name="icon" required></textarea>
-                <label for="icon">Icon</label>
-            </div>
+{{--            <div class="form-floating">--}}
+{{--                <textarea class="form-control" placeholder="Icon" id="icon" name="icon" required></textarea>--}}
+{{--                <label for="icon">Icon</label>--}}
+{{--            </div>--}}
 
             <div class="btn-group mt-4" role="group" aria-label="Basic checkbox toggle button group">
                 <input type="checkbox" class="btn-check" name="status" id="status" autocomplete="off">

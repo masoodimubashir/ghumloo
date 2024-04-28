@@ -25,12 +25,12 @@
                             >
                         </div>
 
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Icon" id="icon" name="icon" required>
-                                {{$service->icon}}
-                            </textarea>
-                            <label for="icon">Icon</label>
-                        </div>
+{{--                        <div class="form-floating">--}}
+{{--                            <textarea class="form-control" placeholder="Icon" id="icon" name="icon" required>--}}
+{{--                                {{$service->icon}}--}}
+{{--                            </textarea>--}}
+{{--                            <label for="icon">Icon</label>--}}
+{{--                        </div>--}}
 
                         <div class="form-switch mt-2">
                             <input

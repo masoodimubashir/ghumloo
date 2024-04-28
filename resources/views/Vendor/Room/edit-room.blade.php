@@ -28,7 +28,7 @@
                                 <input
                                         name="room_number"
                                         min="0"
-                                        type="number"
+                                        type="text"
                                         placeholder="Room Number..."
                                         class="form-control"
                                         value="{{$room->room_number}}"
@@ -180,7 +180,7 @@
                         <h4>Rate Plan</h4>
                         <div class="row form-group">
 
-                            <div class="col-md-6 ">'
+                            <div class="col-md-4 ">'
                                 <label>Price Per Night</label>
                                 <input
                                         name="price_per_night"
@@ -194,47 +194,16 @@
                                 {{ $message }}
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label>Discount</label>
-                                <input
-                                        name="discount_price"
-                                        min="0"
-                                        type="number"
-                                        placeholder="Discount"
-                                        class="form-control"
-                                        value="{{$room->discount_price}}"
-                                >
-                                @error('discount_price')
-                                {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
 
-
-                        <div class="row form-group">
-
-                            <div class="col-md-4 ">
-                                <label>Tax</label>
-                                <input
-                                        name="tax"
-                                        type="number"
-                                        placeholder="Tax @ 10%"
-                                        class="form-control"
-                                        value="{{$room->tax}}"
-                                >
-                                @error('tax')
-                                {{ $message }}
-                                @enderror
-                            </div>
                             <div class="col-md-4 ">
                                 <label>Max Persons</label>
 
                                 <input
-                                        name="max_persons"
-                                        type="number"
-                                        placeholder="Max Allowed Persons"
-                                        class="form-control"
-                                        value="{{$room->max_persons}}"
+                                    name="max_persons"
+                                    type="number"
+                                    placeholder="Max Allowed Persons"
+                                    class="form-control"
+                                    value="{{$room->max_persons}}"
                                 >
                                 @error('max_persons')
                                 {{ $message }}
@@ -244,17 +213,78 @@
                                 <label>Children</label>
 
                                 <input
-                                        name="max_children"
-                                        type="number"
-                                        placeholder="Max Allowed Children"
-                                        class="form-control"
-                                        value="{{$room->max_children}}"
+                                    name="max_children"
+                                    type="number"
+                                    placeholder="Max Allowed Children"
+                                    class="form-control"
+                                    value="{{$room->max_children}}"
                                 >
                                 @error('max_children')
                                 {{ $message }}
                                 @enderror
                             </div>
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <label>Discount</label>--}}
+{{--                                <input--}}
+{{--                                        name="discount_price"--}}
+{{--                                        min="0"--}}
+{{--                                        type="number"--}}
+{{--                                        placeholder="Discount"--}}
+{{--                                        class="form-control"--}}
+{{--                                        value="{{$room->discount_price}}"--}}
+{{--                                >--}}
+{{--                                @error('discount_price')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
                         </div>
+
+
+{{--                        <div class="row form-group">--}}
+
+{{--                            <div class="col-md-4 ">--}}
+{{--                                <label>Tax</label>--}}
+{{--                                <input--}}
+{{--                                        name="tax"--}}
+{{--                                        type="number"--}}
+{{--                                        placeholder="Tax @ 10%"--}}
+{{--                                        class="form-control"--}}
+{{--                                        value="{{$room->tax}}"--}}
+{{--                                >--}}
+{{--                                @error('tax')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-4 ">--}}
+{{--                                <label>Max Persons</label>--}}
+
+{{--                                <input--}}
+{{--                                        name="max_persons"--}}
+{{--                                        type="number"--}}
+{{--                                        placeholder="Max Allowed Persons"--}}
+{{--                                        class="form-control"--}}
+{{--                                        value="{{$room->max_persons}}"--}}
+{{--                                >--}}
+{{--                                @error('max_persons')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-4 ">--}}
+{{--                                <label>Children</label>--}}
+
+{{--                                <input--}}
+{{--                                        name="max_children"--}}
+{{--                                        type="number"--}}
+{{--                                        placeholder="Max Allowed Children"--}}
+{{--                                        class="form-control"--}}
+{{--                                        value="{{$room->max_children}}"--}}
+{{--                                >--}}
+{{--                                @error('max_children')--}}
+{{--                                {{ $message }}--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
 
                         <div class="mt-4 p-3 rounded bg-secondary">
@@ -307,23 +337,19 @@
 
                         <hr>
 
-                        <h4>Extra Services</h4>
 
-                        <div class="mt-4 p-3 rounded bg-secondary">
 
+                        <div class="mt-4 p-3 rounded bg-secondary gap-2 ">
+                            <h4>Extra Services</h4>
+                            <br>
                             @if($services->isNotEmpty())
                                 @foreach($services as $service)
-                                    <label>
-                                        {!! $service->icon !!}
+                                    <label class="bg-white p-2 rounded col-md-3 col-xl-2">
                                         <input type="checkbox" name="services[]" value="{{$service->id}}">
-                                        <span class="lever"></span>
+                                        {{$service->service}} &nbsp;
                                     </label>
                                 @endforeach
                             @endif
-
-                            @error('services')
-                            {{ $message }}
-                            @enderror
 
                         </div>
 

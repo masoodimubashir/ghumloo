@@ -25,8 +25,8 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('phone_one');
             $table->string('phone_two')->nullable();
-            $table->date('check_in');
-            $table->date('check_out');
+            $table->time('check_in');
+            $table->time('check_out');
             $table->text('description');
             $table->string('address');
             $table->string('search_area');
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->boolean('popular')->default(false);
             $table->boolean('allowed_pets')->default(false);
             $table->boolean('status')->default(false);
-            $table->json('images')->nullable();
+            $table->string('images')->nullable();
             $table->tinyText('slug');
             $table->timestamps();
         });

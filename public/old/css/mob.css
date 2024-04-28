@@ -1,7 +1,7 @@
-/*----------------------------------------- * Project: The Travel * Version: v2.0 * Copyright 2016-2020 rn53themes * V1.0: 03/09/2016 * V2.0: 24/08/2017 * Author: RN53 Themes * Email: rn53themes@gmail.com * Website: http://www.rn53themes.net 
+/*----------------------------------------- * Project: The Travel * Version: v2.0 * Copyright 2016-2020 rn53themes * V1.0: 03/09/2016 * V2.0: 24/08/2017 * Author: RN53 Themes * Email: rn53themes@gmail.com * Website: http://www.rn53themes.net
 /*-------------------------------------------------------*/
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 1330px wide,below css will be applied. 
+/* When the browser is between 0px and 1330px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 1330px) {
     .db-l {
@@ -17,7 +17,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 1100px wide,below css will be applied. 
+/* When the browser is between 0px and 1100px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 1100px) {
     .book-tab-inn {
@@ -25,7 +25,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 992px wide,below css will be applied. 
+/* When the browser is between 0px and 992px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 992px) {
     .top-logo,.ed-top{
@@ -74,7 +74,8 @@
    }
     .nh-help {
         background-size: cover;
-   }
+   }        height: 400px !important;
+
     .nh-help::before {
         background: #00BCD4;
    }
@@ -227,7 +228,7 @@
     display: table;}
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 767px wide,below css will be applied. 
+/* When the browser is between 0px and 767px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 767px) {
     .tb-space {
@@ -452,7 +453,7 @@
         padding-top: 4%;
         padding-bottom: 7%;
         padding-left: 20px;
-        padding-right: 20px 
+        padding-right: 20px
    }
     .carousel-caption {
         padding-bottom: 15% !important;
@@ -485,7 +486,8 @@
    }
     .tourb2-ab-p1-right {
         margin-top: 30px;
-   }
+   }        height: 400px !important;
+
     .tourb2-ab-p3-com {
         padding: 15px 15px 0px 15px;
    }
@@ -561,7 +563,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is 767px or wider,below css will be applied. 
+/* When the browser is 767px or wider,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (min-width: 767px) {
     .dropdown:hover .dropdown-menu {
@@ -593,7 +595,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 481px wide,below css will be applied. 
+/* When the browser is between 0px and 481px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 480px) {
     body {
@@ -655,7 +657,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 1030px wide,below css will be applied. 
+/* When the browser is between 0px and 1030px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 1148px) {
     .menu_book {
@@ -692,10 +694,11 @@
    }
     .carousel-inner1 > .item > img {
         display: block;
+        height: 400px !important;
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is 992px or wider,below css will be applied. 
+/* When the browser is 992px or wider,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (min-width: 992px) {
     .help-line {
@@ -723,7 +726,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 767px and 992px wide,below css will be applied. 
+/* When the browser is between 767px and 992px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (min-width: 767px) and (max-width: 992px) {
     .navbar-nav {
@@ -753,7 +756,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is 992px or wider,below css will be applied. 
+/* When the browser is 992px or wider,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (min-width: 992px) {
     .nav > li > a {
@@ -761,7 +764,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 1130px wide,below css will be applied. 
+/* When the browser is between 0px and 1130px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 1130px) {
     .ticket ul li {
@@ -769,7 +772,7 @@
    }
 }
 /*-------------------------------------------------------*/
-/* When the browser is between 0px and 1180px wide,below css will be applied. 
+/* When the browser is between 0px and 1180px wide,below css will be applied.
 /*-------------------------------------------------------*/
 @media screen and (max-width: 1180px) {
 }

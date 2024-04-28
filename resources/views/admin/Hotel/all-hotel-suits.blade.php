@@ -26,7 +26,7 @@
                             <tbody>
                             @foreach($hotels as $hotel)
                                 @php
-                                    $images = json_decode($hotel->images)
+                                    $images = explode(',' ,$hotel->images)
                                 @endphp
                                 <tr>
                                     <td>

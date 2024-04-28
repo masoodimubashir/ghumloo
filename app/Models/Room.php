@@ -18,9 +18,7 @@ class Room extends Model
         'area',
         'max_persons',
         'max_children',
-        'tax',
         'price_per_night',
-        'discount_price',
         'cancellation_in_days',
         'services',
         'overview',
@@ -34,7 +32,7 @@ class Room extends Model
 
     public function roomConfiguration(): HasOne
     {
-        return $this->hasOne(RoomConfiguration::class);
+        return $this->hasOne(RoomConfiguration::class, 'room_id', 'id');
     }
 
     public function roomConfigurations(): HasMany

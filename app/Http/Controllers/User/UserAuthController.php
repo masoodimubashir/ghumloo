@@ -7,6 +7,7 @@ use App\Mail\EmailVerification;
 use App\Mail\ForgotPassword;
 use App\Models\PasswordReset;
 use App\Models\User;
+use App\Service\AadhaarVerify;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -15,6 +16,42 @@ use Illuminate\Validation\Rules\Password;
 
 class UserAuthController extends Controller
 {
+
+    public function verifyAdhar(Request $request, AadhaarVerify $aadhaarVerify)
+    {
+        $request->validate([
+            'aadhaar' => 'sometimes|string|digits:12',
+        ]);
+
+        if (auth()->user()->adhar_verified_at !== null) {
+            return redirect()->back()->with('success', 'Aadhaar already verified');
+        }
+
+        $response = $aadhaarVerify->setData($request->aadhaar);
+
+
+        if ($response['verified'] === 'true') {
+
+            $user = User::where('email', auth()->user()->email)->first();
+
+            $user->update([
+                'adhar_verified_at' => now()
+            ]);
+
+            $user->aadhaar()->create([
+                'aadhaar_number' => $request->aadhaar,
+                'state' => $response['state'],
+                'phone' => $response['mobileNumber'],
+            ]);
+
+            return redirect()->back()->with('success', 'Aadhaar verified');
+
+        } elseif ($response[1] === 400) {
+            return redirect()->back()->with('error', $response[0]);
+        }
+        return redirect()->back()->with('error', 'Something went wrong');
+    }
+
     public function viewRegister()
     {
         if (session()->has('user')) {
@@ -59,8 +96,13 @@ class UserAuthController extends Controller
 
         $user = User::where('email', $credentials['email'])->first();
 
-       if ($user){
-           if ($user->password !== null){
+        if (!$user) {
+            return redirect()->back()->with('error', 'The provided credentials do not match our records.');
+        }
+
+        if ($user) {
+
+            if ($user->password !== null) {
                if (!Auth::attempt($credentials)) {
                    return back()->withErrors([
                        'email' => 'The provided credentials do not match our records.',
@@ -69,6 +111,7 @@ class UserAuthController extends Controller
            }
            return redirect()->back()->with('error', 'We cannot sign in to the account. Please try Another method');
        }
+
 
         $request->session()->put('user', $user);
         return redirect()->route('user.dashboard');

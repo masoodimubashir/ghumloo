@@ -26,7 +26,7 @@ class ServiceTypeController extends Controller
     {
         $service = Validator::make($request->all(), [
             'service' => 'required|string|unique:services',
-            'icon' => 'required|string'
+//            'icon' => 'required|string'
         ]);
 
         if ($service->fails()) {
@@ -40,7 +40,7 @@ class ServiceTypeController extends Controller
 
         Service::create([
             'service' => $request->input('service'),
-            'icon' => $request->input('icon'),
+//            'icon' => $request->input('icon'),
             'status' => $status,
             'slug' => $slug
         ]);
@@ -87,7 +87,7 @@ class ServiceTypeController extends Controller
     {
         $request->validate([
             'service' => 'required|string|unique:services,service,' . $id,
-            'icon' => 'required|string'
+//            'icon' => 'required|string'
         ]);
 
         $service = Service::find($id);
@@ -97,7 +97,7 @@ class ServiceTypeController extends Controller
 
         $service->update([
             'service' => $request->input('service'),
-            'icon' => $request->input('icon'),
+//            'icon' => $request->input('icon'),
             'status' => $status,
             'slug' => $slug
         ]);

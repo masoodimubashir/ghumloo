@@ -69,7 +69,7 @@
         <div class="rows inner_banner inner_banner_2">
             <div class="container">
                 <div class="spe-title tit-inn-pg">
-                    <h1><span>Universal luxury Grand Hotel</span></h1>
+                    <h1><span>{{$hotel->hotel_name}} Hotel</span></h1>
                     <div class="title-line">
                         <div class="tl-1"></div>
                         <div class="tl-2"></div>
@@ -77,9 +77,10 @@
                     </div>
                     <p>World's leading Hotel Booking website,Over 30,000 Hotel rooms worldwide.</p>
                     <ul>
-                        <li><a href="main.html">Home</a></li>
+                        <li><a href="{{route('front.home')}}">Home</a></li>
                         <li><i class="fa fa-angle-right" aria-hidden="true"></i> </li>
-                        <li><a href="#" class="bread-acti">Universal luxury Grand Hotel</a>
+                        <li>
+                            {{$hotel->hotel_name}}
                         </li>
                     </ul>
                 </div>
@@ -92,9 +93,7 @@
             <div class="container">
                 <div class="banner_book_1">
                     <ul>
-                        <li class="dl1">Location : Illunois,USA</li>
-                        <li class="dl2">Price : $500</li>
-                        <li class="dl3">Duration : One Night</li>
+                        <li class="dl1">Location : {{$hotel->city->state->state}} - {{$hotel->city->city}}</li>
                         <li class="dl4"><a href="booking.html">Book Now</a> </li>
                     </ul>
                 </div>
@@ -108,26 +107,20 @@
                 <div class="col-md-8 tour_lhs">
                     <!--====== TOUR TITLE ==========-->
                     <div class="tour_head">
-                        <h2>Universal luxury Grand Hotel <span class="tour_star"><i class="fa fa-star"
-                                    aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                    aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i></span><span
-                                class="tour_rat">4.5</span></h2>
+                        <h2>
+                            {{$hotel->hotel_name}}
+                            <span class="tour_star">
+                                @for($i=1; $i<=$hotel->star_rating; $i++)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                @endfor
+                            </span>
+                            <span class="tour_rat">{{$hotel->star_rating}}</span>
+                        </h2>
                     </div>
                     <!--====== TOUR DESCRIPTION ==========-->
                     <div class="tour_head1 hotel-com-color">
-                        <h3>About GRAND HOTEL</h3>
-                        <p>Discover two of South America’s greatest cities, Rio de Janeiro and Buenos Aires, at a leisurely
-                            pace. A major highlight on this journey is a visit to Iguassu Falls in between your two city
-                            stays. It truly is one of the most spectacular sights on Earth. See the impressive falls from
-                            both the Brazilian and Argentine sides.</p>
-                        <p>Brazil’s view takes you through clouds of mist and the opportunity to see these 275 falls,
-                            spanning nearly two miles! Argentina’s side allows you to walk along the boardwalk network and
-                            embark on a jungle train through the forest for unforgettable views. Hear the deafening roar and
-                            admire the brilliant rainbows created by the clouds of spray, and take in the majesty of this
-                            wonder of the world. From vibrant cities to scenic beauty, this vacation to Rio de Janeiro,
-                            Iguassu Falls, and Buenos Aires will leave you with vacation memories you’ll cherish for life.
-                        </p>
+                        <h3>Description</h3>
+                        <p>{{$hotel->description}}</p>
                     </div>
                     <!--====== ROOMS: HOTEL BOOKING ==========-->
                     <div class="tour_head1 hotel-book-room">
@@ -135,379 +128,199 @@
                         <div id="myCarousel1" class="carousel slide" data-ride="carousel">
                             <!-- Indicators -->
                             <ol class="carousel-indicators carousel-indicators-1">
-                                <li data-target="#myCarousel1" data-slide-to="0"><img src="images/gallery/s1.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="1"><img src="images/gallery/s2.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="2"><img src="images/gallery/s3.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="3"><img src="images/gallery/s4.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="4"><img src="images/gallery/s5.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="5"><img src="images/gallery/s6.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="6"><img src="images/gallery/s7.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="7"><img src="images/gallery/s8.jpg"
-                                        alt="Chania">
-                                </li>
-                                <li data-target="#myCarousel1" data-slide-to="8"><img src="images/gallery/s9.jpg"
-                                        alt="Chania">
-                                </li>
+                                @php
+                                    $images = explode(',' , $hotel->images);
+                                @endphp
+                                @foreach($images as $key => $image)
+                                    <li data-target="#myCarousel1" data-slide-to="{{ $key }}"
+                                        class="{{ $key == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Chania">
+                                    </li>
+                                @endforeach
                             </ol>
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner carousel-inner1" role="listbox">
-                                <div class="item active"> <img src="images/gallery/s1.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s2.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s3.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s4.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s5.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s6.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s7.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s8.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
-                                <div class="item"> <img src="images/gallery/s9.jpg" alt="Chania" width="460"
-                                        height="345"> </div>
+                                @foreach($images as $key => $image)
+                                    <div class="item {{ $key == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="Chania" width="460"
+                                             height="345">
+                                    </div>
+                                @endforeach
                             </div>
                             <!-- Left and right controls -->
                             <a class="left carousel-control" href="#myCarousel1" role="button" data-slide="prev">
-                                <span><i class="fa fa-angle-left hotel-gal-arr" aria-hidden="true"></i></span> </a>
+                                <span><i class="fa fa-angle-left hotel-gal-arr" aria-hidden="true"></i></span>
+                            </a>
                             <a class="right carousel-control" href="#myCarousel1" role="button" data-slide="next">
-                                <span><i class="fa fa-angle-right hotel-gal-arr hotel-gal-arr1"
-                                        aria-hidden="true"></i></span> </a>
+                                <span><i class="fa fa-angle-right hotel-gal-arr hotel-gal-arr1" aria-hidden="true"></i></span>
+                            </a>
                         </div>
+
                     </div>
-                    <!--====== ABOUT THE TOUR ==========-->
-                    <div class="tour_head1">
-                        <h3>special features</h3>
-                        <table>
-                            <tr>
-                                <th>Places covered</th>
-                                <th class="event-res">Inclusions</th>
-                                <th class="event-res">Exclusions</th>
-                                <th>Event Date</th>
-                            </tr>
-                            <tr>
-                                <td>Rio De Janeiro ,Brazil</td>
-                                <td class="event-res">Accommodation</td>
-                                <td class="event-res">Return Airfare & Taxes</td>
-                                <td>Nov 12, 2017</td>
-                            </tr>
-                            <tr>
-                                <td>Iguassu Falls </td>
-                                <td class="event-res">8 Breakfast, 3 Dinners</td>
-                                <td class="event-res">Arrival & Departure transfers</td>
-                                <td>Nov 14, 2017</td>
-                            </tr>
-                            <tr>
-                                <td>Peru,Lima </td>
-                                <td class="event-res">First-class Travel</td>
-                                <td class="event-res">travel insurance</td>
-                                <td>Nov 16, 2017</td>
-                            </tr>
-                            <tr>
-                                <td>Cusco & Buenos Aires </td>
-                                <td class="event-res">Free Sightseeing</td>
-                                <td class="event-res">Service tax of 4.50%</td>
-                                <td>Nov 18, 2017</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!--====== HOTEL ROOM TYPES ==========-->
                     <div class="tour_head1">
                         <h3>ROOMS & AVAILABILITIES</h3>
                         <div class="tr-room-type">
                             <ul>
-                                <li>
-                                    <div class="tr-room-type-list">
-                                        <div class="col-md-3 tr-room-type-list-1"><img src="images/rooms/01.jpg"
-                                                alt="" />
+                                @foreach($hotel->rooms as $room)
+                                    @php
+                                        $services = explode(',' ,$room->services);
+                                        $images = explode(',' ,$room->images)
+                                    @endphp
+
+                                    <li>
+                                        <div class="tr-room-type-list">
+                                            <div class="col-md-3 tr-room-type-list-1">
+                                                @if($images == Null)
+                                                    <img src="" alt=""/>
+                                                @else
+                                                    <img src="{{asset('storage/' . $images[0])}}" alt=""/>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6 tr-room-type-list-2">
+                                                <h4>{{$room->roomConfiguration->roomType->room_type}}</h4>
+                                                <p>
+                                                    <b>Amenities:</b>
+                                                </p>
+                                                <span><b>Includes</b>
+                                                   @if($room->breakfast === 1)
+                                                        Breakfast,
+                                                    @endif
+                                                    @if($room->lunch == 1)
+                                                        Lunch,
+                                                    @endif
+                                                    @if($room->dinner === 1)
+                                                        Dinner,
+                                                    @endif
+                                                </span>
+                                                <span><b>Maxinum </b> : {{$room->max_persons}} Persons / {{$room->max_children}} Children</span>
+                                            </div>
+                                            <div class="col-md-3 tr-room-type-list-3">
+                                                <span class="hot-list-p3-1">Price Per Night</span>
+                                                <span class="hot-list-p3-2">
+                                                    <i style="font-size: .8em" class="fa fa-indian-rupee"></i> {{$room->price_per_night}}
+                                                </span>
+                                                <a href="booking.html" class="hot-page2-alp-quot-btn spec-btn-text">Book
+                                                    Now</a></div>
                                         </div>
-                                        <div class="col-md-6 tr-room-type-list-2">
-                                            <h4>Ultra Deluxe</h4>
-                                            <p><b>Amenities: </b>Television, Wi-Fi, Hair dryer, Towels, Dining, Music, GYM
-                                                and more.. </p> <span><b>Includes</b> : Free Parking, Breakfast, VAT</span>
-                                            <span><b>Maxinum </b> : 4 Persons</span>
-                                        </div>
-                                        <div class="col-md-3 tr-room-type-list-3"> <span class="hot-list-p3-1">Price Per
-                                                Night</span> <span class="hot-list-p3-2">$940</span> <a
-                                                href="booking.html" class="hot-page2-alp-quot-btn spec-btn-text">Book
-                                                Now</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="tr-room-type-list">
-                                        <div class="col-md-3 tr-room-type-list-1"><img src="images/rooms/02.jpg"
-                                                alt="" />
-                                        </div>
-                                        <div class="col-md-6 tr-room-type-list-2">
-                                            <h4>Premium Rooms(EXECUTIVE)</h4>
-                                            <p><b>Amenities: </b>Television, Wi-Fi, Hair dryer, Towels, Dining, Music, GYM
-                                                and more.. </p> <span><b>Includes</b> : Free Parking, Breakfast, VAT</span>
-                                            <span><b>Maxinum </b> : 4 Persons</span>
-                                        </div>
-                                        <div class="col-md-3 tr-room-type-list-3"> <span class="hot-list-p3-1">Price Per
-                                                Night</span> <span class="hot-list-p3-2">$720</span> <a
-                                                href="booking.html" class="hot-page2-alp-quot-btn spec-btn-text">Book
-                                                Now</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="tr-room-type-list">
-                                        <div class="col-md-3 tr-room-type-list-1"><img src="images/rooms/03.jpg"
-                                                alt="" />
-                                        </div>
-                                        <div class="col-md-6 tr-room-type-list-2">
-                                            <h4>EXECUTIVE DELUXE MARINA BAY VIEW</h4>
-                                            <p><b>Amenities: </b>Television, Wi-Fi, Hair dryer, Towels, Dining, Music, GYM
-                                                and more.. </p> <span><b>Includes</b> : Free Parking, Breakfast, VAT</span>
-                                            <span><b>Maxinum </b> : 4 Persons</span>
-                                        </div>
-                                        <div class="col-md-3 tr-room-type-list-3"> <span class="hot-list-p3-1">Price Per
-                                                Night</span> <span class="hot-list-p3-2">$560</span> <a
-                                                href="booking.html" class="hot-page2-alp-quot-btn spec-btn-text">Book
-                                                Now</a> </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="tr-room-type-list">
-                                        <div class="col-md-3 tr-room-type-list-1"><img src="images/rooms/04.jpg"
-                                                alt="" />
-                                        </div>
-                                        <div class="col-md-6 tr-room-type-list-2">
-                                            <h4>Normal Rooms</h4>
-                                            <p><b>Amenities: </b>Television, Wi-Fi, Hair dryer, Towels, Dining, Music, GYM
-                                                and more.. </p> <span><b>Includes</b> : Free Parking, Breakfast, VAT</span>
-                                            <span><b>Maxinum </b> : 4 Persons</span>
-                                        </div>
-                                        <div class="col-md-3 tr-room-type-list-3"> <span class="hot-list-p3-1">Price Per
-                                                Night</span> <span class="hot-list-p3-2">$420</span> <a
-                                                href="booking.html" class="hot-page2-alp-quot-btn spec-btn-text">Book
-                                                Now</a> </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <!--====== AMENITIES ==========-->
                     <div class="tour_head1 hot-ameni">
-                        <h3>Hotel Amenities</h3>
+                        <h3>Property Rules</h3>
                         <ul>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Airport transportation (surcharge)</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Number of floors - 9 </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Coffee shop or café </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Dry cleaning/laundry service</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Health club </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Billiards or pool table</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Total number of rooms - 108</li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Bar/lounge </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Air Conditioner </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Mini Bar (with liquor) </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Separate Bedroom </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Living Room Space </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Smoking Rooms Available </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Internet </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Transport to / from Hotel </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Concierge </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Rental Car Service Desk On Site </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Room Service </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Beauty Salon </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Business Centre </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Fitness Centre </li>
-                            <li><i class="fa fa-check" aria-hidden="true"></i> Spa and Pool </li>
+                            @if($hotel->allowed_pets == 1)
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Pets Are Allowed</li>
+                            @else
+                                <li><i class="fa fa-check" aria-hidden="true"></i> Pets Are Not Allowed</li>
+                            @endif
+
+                            <li>
+                                <i class="fa fa-check" aria-hidden="true">
+                                </i>Check In: {{\Carbon\Carbon::parse($hotel->check_in)->format('h:i A')}} - Check Out: {{\Carbon\Carbon::parse($hotel->check_out)->format('h:i A')}}
+                            </li>
+
                         </ul>
+
+
                     </div>
+
+
                     <!--====== TOUR LOCATION ==========-->
                     <div class="tour_head1 tout-map map-container">
                         <h3>Location</h3>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6290415.157581651!2d-93.99661009218904!3d39.661150926343694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880b2d386f6e2619%3A0x7f15825064115956!2sIllinois%2C+USA!5e0!3m2!1sen!2sin!4v1467884030780"
-                            allowfullscreen></iframe>
+
+                        <div class="mapouter">
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+                            <input type="hidden" id="longitude" name="longitude"
+                                   value="{{ $hotel->longitude }}">
+                            <input type="hidden" id="latitude" name="latitude" value="{{ $hotel->latitude }}">
+                            <input type="hidden" id="maplocation" name="maplocation" value="{{ $hotel->search_area }}">
+
+                        </div>
+
+
                     </div>
                     <div>
                         <div class="dir-rat">
-                            <div class="dir-rat-inn dir-rat-title">
-                                <h3>Write Your Rating Here</h3>
-                                <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
-                                    anything embarrassing hidden in the middle of text</p>
-                                <fieldset class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" />
-                                    <label class="full" for="star5" title="Awesome - 5 stars"></label>
-                                    <input type="radio" id="star4half" name="rating" value="4 and a half" />
-                                    <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                                    <input type="radio" id="star4" name="rating" value="4" />
-                                    <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                                    <input type="radio" id="star3half" name="rating" value="3 and a half" />
-                                    <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                                    <input type="radio" id="star3" name="rating" value="3" />
-                                    <label class="full" for="star3" title="Meh - 3 stars"></label>
-                                    <input type="radio" id="star2half" name="rating" value="2 and a half" />
-                                    <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="2" />
-                                    <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                                    <input type="radio" id="star1half" name="rating" value="1 and a half" />
-                                    <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                                    <input type="radio" id="star1" name="rating" value="1" />
-                                    <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                                    <input type="radio" id="starhalf" name="rating" value="half" />
-                                    <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                                </fieldset>
-                            </div>
                             <div class="dir-rat-inn">
-                                <form class="dir-rat-form">
-                                    <div class="form-group col-md-6 pad-left-o">
-                                        <input type="text" class="form-control" id="email11"
-                                            placeholder="Enter Name">
+                                <form class="dir-rat-form" action="{{route('user.hotel-review', [$hotel->id])}}"
+                                      method="POST">
+                                    @csrf
+                                    <div class="dir-rat-inn dir-rat-title">
+                                        <h3>Write Your Rating Here</h3>
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" name="rating" value="5"/>
+                                            <label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                            <input type="radio" id="star4half" name="rating" value="4 and a half"/>
+                                            <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                            <input type="radio" id="star4" name="rating" value="4"/>
+                                            <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                            <input type="radio" id="star3half" name="rating" value="3 and a half"/>
+                                            <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                            <input type="radio" id="star3" name="rating" value="3"/>
+                                            <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                            <input type="radio" id="star2half" name="rating" value="2 and a half"/>
+                                            <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                            <input type="radio" id="star2" name="rating" value="2"/>
+                                            <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                            <input type="radio" id="star1half" name="rating" value="1 and a half"/>
+                                            <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                            <input type="radio" id="star1" name="rating" value="1"/>
+                                            <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                            <input type="radio" id="starhalf" name="rating" value="half"/>
+                                            <label class="half" for="starhalf"
+                                                   title="Sucks big time - 0.5 stars"></label>
+                                        </fieldset>
+
                                     </div>
-                                    <div class="form-group col-md-6 pad-left-o">
-                                        <input type="number" class="form-control" id="email12"
-                                            placeholder="Enter Mobile">
-                                    </div>
-                                    <div class="form-group col-md-6 pad-left-o">
-                                        <input type="email" class="form-control" id="email13"
-                                            placeholder="Enter Email id">
-                                    </div>
-                                    <div class="form-group col-md-6 pad-left-o">
-                                        <input type="text" class="form-control" id="email14"
-                                            placeholder="Enter your City">
-                                    </div>
+                                    @error('rating')
+                                    <strong class="text-danger">
+                                        {{ $message }}
+                                    </strong>
+                                    @enderror
                                     <div class="form-group col-md-12 pad-left-o">
-                                        <textarea placeholder="Write your message"></textarea>
+                                        <textarea placeholder="Write your message" name="comment"></textarea>
+                                        @error('comment')
+                                        <strong class="text-danger">
+                                            {{ $message }}
+                                        </strong>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-12 pad-left-o">
                                         <input type="submit" value="SUBMIT" class="link-btn">
                                     </div>
                                 </form>
+
                             </div>
                             <!--COMMENT RATING-->
-                            <div class="dir-rat-inn dir-rat-review">
-                                <div class="row">
-                                    <div class="col-md-3 dir-rat-left"> <img src="images/reviewer/4.jpg" alt="">
-                                        <p>Orange Fab & Weld <span>19th January, 2017</span> </p>
-                                    </div>
-                                    <div class="col-md-9 dir-rat-right">
-                                        <div class="dir-rat-star"> <i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                        <p>Michael & his team have been helping us with our eqiupment finance for the past 5
-                                            years - I think that says a quite a lot.. Michael is always ready to go the
-                                            extra mile, always available, always helpfull that goes the same for his team
-                                            that work with him - definatley our first phone call.</p>
-                                        <ul>
-                                            <li><a href="#"><span>Like</span><i class="fa fa-thumbs-o-up"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Dis-Like</span><i class="fa fa-thumbs-o-down"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Report</span> <i class="fa fa-flag-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Comments</span> <i class="fa fa-commenting-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Share Now</span> <i class="fa fa-facebook"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-google-plus"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                                            </li>
-                                        </ul>
+                            @foreach($hotel->reviews as $review)
+                                <div class="dir-rat-inn dir-rat-review">
+                                    <div class="row">
+                                        <div class="col-md-3 dir-rat-left">
+                                            @if(session('user')->$image)
+                                                <img style="height: 100px; width: 100px"
+                                                     src="{{asset('storage/' . $review->user->image)}}" alt="">
+                                            @endif
+                                            <p>
+                                                {{$review->user->name}}
+                                                <span>{{\Carbon\Carbon::parse($review->created_at)->format('M,d,Y')}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-9 dir-rat-right">
+                                            <div class="dir-rat-star">
+                                                @for($i = 0; $i < $review->rating; $i++)
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                @endfor
+                                            </div>
+                                            <p>{{$review->comment}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                             <!--COMMENT RATING-->
-                            <div class="dir-rat-inn dir-rat-review">
-                                <div class="row">
-                                    <div class="col-md-3 dir-rat-left"> <img src="images/reviewer/3.jpg" alt="">
-                                        <p>Orange Fab & Weld <span>19th January, 2017</span> </p>
-                                    </div>
-                                    <div class="col-md-9 dir-rat-right">
-                                        <div class="dir-rat-star"> <i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                        <p>Michael & his team have been helping us with our eqiupment finance for the past 5
-                                            years - I think that says a quite a lot.. Michael is always ready to go the
-                                            extra mile, always available, always helpfull that goes the same for his team
-                                            that work with him - definatley our first phone call.</p>
-                                        <ul>
-                                            <li><a href="#"><span>Like</span><i class="fa fa-thumbs-o-up"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Dis-Like</span><i class="fa fa-thumbs-o-down"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Report</span> <i class="fa fa-flag-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Comments</span> <i class="fa fa-commenting-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Share Now</span> <i class="fa fa-facebook"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-google-plus"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--COMMENT RATING-->
-                            <div class="dir-rat-inn dir-rat-review">
-                                <div class="row">
-                                    <div class="col-md-3 dir-rat-left"> <img src="images/reviewer/1.jpg" alt="">
-                                        <p>Orange Fab & Weld <span>19th January, 2017</span> </p>
-                                    </div>
-                                    <div class="col-md-9 dir-rat-right">
-                                        <div class="dir-rat-star"> <i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
-                                                aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-                                                class="fa fa-star-o" aria-hidden="true"></i> </div>
-                                        <p>Michael & his team have been helping us with our eqiupment finance for the past 5
-                                            years - I think that says a quite a lot.. Michael is always ready to go the
-                                            extra mile, always available, always helpfull that goes the same for his team
-                                            that work with him - definatley our first phone call.</p>
-                                        <ul>
-                                            <li><a href="#"><span>Like</span><i class="fa fa-thumbs-o-up"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Dis-Like</span><i class="fa fa-thumbs-o-down"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Report</span> <i class="fa fa-flag-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Comments</span> <i class="fa fa-commenting-o"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><span>Share Now</span> <i class="fa fa-facebook"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-google-plus"
-                                                        aria-hidden="true"></i></a> </li>
-                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -515,31 +328,36 @@
                     <!--====== SPECIAL OFFERS ==========-->
                     <div class="tour_right tour_offer">
                         <div class="band1"><img src="images/offer.png" alt="" /> </div>
-                        <p>Special Offer</p>
-                        <h4>$500<span class="n-td">
-                                <span class="n-td-1">$800</span>
-                            </span>
+                        <p>Room Price</p>
+                        <h4><i class="fa fa-indian-rupee"></i>
+                            @foreach($hotel->rooms->sortBy('price_per_night')->take(1) as $room)
+                                {{ $room->price_per_night }}
+                            @endforeach
+
+                            {{--                            <span class="n-td">--}}
+{{--                                <span class="n-td-1">$800</span>--}}
+{{--                            </span>--}}
                         </h4> <a href="booking.html" class="link-btn">Book Now</a>
                     </div>
                     <!--====== TRIP INFORMATION ==========-->
                     <div class="tour_right tour_incl tour-ri-com">
-                        <h3>Trip Information</h3>
+                        <h3>Hotel Overview</h3>
                         <ul>
-                            <li>Location : Rio,Brazil</li>
-                            <li>Arrival Date: Nov 12, 2017</li>
-                            <li>Departure Date: Nov 21, 2017</li>
-                            <li>Free Sightseeing & Hotel</li>
+                            <li>Location : {{$hotel->city->city}}</li>
+                            <li>Property Type: {{$hotel->propertyType->property_type}}</li>
+                            <li>Email:  <strong><a href="tel:{{$hotel->email}}">{{$hotel->email}}</a></strong> </li>
                         </ul>
                     </div>
                     <!--====== PACKAGE SHARE ==========-->
                     <div class="tour_right head_right tour_social tour-ri-com">
                         <h3>Share This Package</h3>
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
-                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a> </li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
-                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
-                            <li><a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a> </li>
+                            <li><a href="#"><i style="font-size: 18px" class="fa-brands fa-facebook"
+                                               aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i style="font-size: 18px" class="fa-brands fa-google-plus"
+                                               aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i style="font-size: 18px" class="fa-brands fa-whatsapp"
+                                               aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
                     <!--====== HELP PACKAGE ==========-->
@@ -547,30 +365,96 @@
                         <h3>Help & Support</h3>
                         <div class="tour_help_1">
                             <h4 class="tour_help_1_call">Call Us Now</h4>
-                            <h4><i class="fa fa-phone" aria-hidden="true"></i> 10-800-123-000</h4>
+                            <h4>
+                                <i style="font-size: .6em" class="fa fa-phone" aria-hidden="true"></i>
+                                <a href="tel:{{$hotel->phone_one}}">{{$hotel->phone_one}}</a>
+                            </h4>
+                            <h4>
+                                <i style="font-size: .6em" class="fa fa-phone" aria-hidden="true"></i>
+                                <a href="tel:{{$hotel->phone_two}}">{{$hotel->phone_two}}</a>
+                            </h4>
+
                         </div>
                     </div>
                     <!--====== PUPULAR TOUR PACKAGES ==========-->
                     <div class="tour_right tour_rela tour-ri-com">
-                        <h3>Popular Packages</h3>
-                        <div class="tour_rela_1"> <img src="images/related1.png" alt="" />
-                            <h4>Dubai 7Days / 6Nights</h4>
-                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                                model text</p> <a href="#" class="link-btn">View this Package</a>
-                        </div>
-                        <div class="tour_rela_1"> <img src="images/related2.png" alt="" />
-                            <h4>Mauritius 4Days / 3Nights</h4>
-                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                                model text</p> <a href="#" class="link-btn">View this Package</a>
-                        </div>
-                        <div class="tour_rela_1"> <img src="images/related3.png" alt="" />
-                            <h4>India 14Days / 13Nights</h4>
-                            <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default
-                                model text</p> <a href="#" class="link-btn">View this Package</a>
-                        </div>
+                        <h3>Top Reviewed Hotels</h3>
+                        @foreach($hotels as $hotel)
+                            @php
+                                $images = explode(',' , $hotel->images)
+                            @endphp
+                            <div class="tour_rela_1">
+                                <img  style="height: 100px; width: 100px; border-radius: 10%;" src="{{asset('storage/' . $images[0])}}" alt="" />
+                                <h4>{{$hotel->hotel_name}} -
+                                    @foreach($hotel->reviews as $review)
+                                        @for($i=1; $i<=$review->rating; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                    @endforeach
+                                </h4>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        const starRating = document.querySelector('.rating');
+
+        starRating.addEventListener('click', (event) => {
+            // Get the clicked label element
+            const clickedLabel = event.target.closest('label');
+
+            // Check if a label is clicked
+            if (clickedLabel) {
+                // Get the clicked radio button's value (rating)
+                const rating = clickedLabel.previousElementSibling.value;
+
+                // Loop through all labels and update their colors
+                starRating.querySelectorAll('label').forEach((label) => {
+                    const starValue = label.nextElementSibling.value; // Get associated radio button value
+                    label.firstChild.style.color = starValue <= rating ? 'orange' : 'lightgray';
+                });
+            }
+        });
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv-WwyCAZ5rJArnCELEtTalFrSBmcyLgk&libraries=places&v=weekly&callback=initMap">
+    </script>
+
+    <script>
+
+
+        function initMap() {
+            setlatlong(parseFloat($("#longitude").val()), parseFloat($("#latitude").val()));
+        }
+
+        // location change by marker
+
+        function setlatlong(longitude, latitude) {
+
+            const myLatLng = {
+                lat: latitude,
+                lng: longitude
+            };
+
+            console.log(myLatLng)
+            const map = new google.maps.Map(document.getElementById("googleMap"), {
+                zoom: 15,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map,
+                draggable: false,
+                animation: google.maps.Animation.DROP,
+                title: $("#maplocation").val(),
+            });
+        }
+    </script>
+
 @endsection

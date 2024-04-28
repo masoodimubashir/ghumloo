@@ -35,11 +35,13 @@
                             @if($rooms->isNotEmpty())
                                 @foreach($rooms as $room)
                                    @php
-                                       $images = json_decode($room->images)
+                                       $images = explode(',' , $room->images)
                                    @endphp
                                     <tr>
                                         <td class="py-1">
-                                            <img src="{{asset('storage/' .  $images[0])}}" alt="image"/>
+                                            @if($images > 0)
+                                                <img src="{{asset('storage/' .  $images[0])}}" alt="image"/>
+                                            @endif
                                         </td>
                                         <td>
                                             {{$room->room_name}}

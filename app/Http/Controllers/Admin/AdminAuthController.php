@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+
 
 class AdminAuthController extends Controller
 {
@@ -49,6 +48,10 @@ class AdminAuthController extends Controller
         ]);
 
         $user = Admin::whereEmail($request->email)->first();
+
+        if (!$user){
+            return redirect()->back()->with('error', 'Email does not exist');
+        }
 
         if (!Hash::check($data['password'], $user->password)) {
             return back()->withErrors([
@@ -97,7 +100,7 @@ class AdminAuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         return redirect()->route('admin.view-login');
     }

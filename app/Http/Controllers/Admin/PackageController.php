@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Package;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class PackageController extends Controller
      */
     public function index()
     {
+
         $packages = Package::with('hotels')
             ->latest()
             ->orderBy('package_name')
@@ -41,7 +43,7 @@ class PackageController extends Controller
             'short_description' => 'required|string',
             'booking_date' => 'date|sometimes',
             'images' => 'required|array',
-            'images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+//            'images.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'price_per_stay' => 'required|array',
             'price_per_stay.*' => 'required|integer|min:1',
             'stay_period' => 'required|array',
@@ -117,7 +119,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        $states = State::where('status', 1)->orderBy('state')->get();
+        $states = State::where('status', '1')->orderBy('state')->get();
         return view('admin.Package.create-package', compact('states'));
     }
 

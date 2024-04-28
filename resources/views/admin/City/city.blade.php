@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-3 ">
-                        <h4 class="card-title col-md-10">States</h4>
+                        <h4 class="card-title col-md-10">Cities</h4>
                         <button
                             type="button"
                             id="myBtn"
@@ -20,7 +20,6 @@
                             <thead>
                             <tr>
                                 <th>State</th>
-
                                 <th>City</th>
                                 <th>Status.</th>
                                 <th>Edit</th>
@@ -28,47 +27,70 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if($cites->isNotEmpty())
-                                @foreach($cites as $city)
+                            @if($states_with_cities->isNotEmpty())
+                                @foreach($states_with_cities as $state)
                                     <tr>
-                                        <td>{{$city->state->state}}</td>
+                                        <td>{{$state->state}}</td>
 
-                                        <td>{{$city->city}}</td>
 
                                         <td>
-                                            @if($city->status === 1)
+                                            @foreach($state->cities as $city)
+                                                {{$city->city}}
+                                                <br>
+                                                <br>
+                                            @endforeach
 
-                                                <label class="badge badge-success">
-                                                    Active
-                                                </label>
-                                            @else
-                                                <label class="badge badge-danger">
-                                                    InActive
-                                                </label>
-                                            @endif
                                         </td>
                                         <td>
-                                            <a
-                                                class="btn btn-outline-info rounded-circle p-1"
-                                                href="{{route('city.edit', [base64_encode($city->id)])}}">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
+                                            @foreach($state->cities as $city)
+
+                                                @if($city->status === 1)
+
+                                                    <label class="badge badge-success">
+                                                        Active
+                                                    </label>
+                                                @else
+                                                    <label class="badge badge-danger">
+                                                        InActive
+                                                    </label>
+                                                @endif
+                                                <br>
+                                                <br>
+                                            @endforeach
+
                                         </td>
                                         <td>
-                                            <form id="deleteForm{{$city->id}}"
-                                                  action="{{ route('city.destroy', [base64_encode($city->id)]) }}"
-                                                  method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                            @foreach($state->cities as $city)
+
                                                 <a
-                                                    class="btn btn-outline-danger btn-sm rounded-circle p-1"
-                                                    href="#"
-                                                    onclick="event.preventDefault();
-                                                           document.getElementById('deleteForm{{$city->id}}').submit();"
-                                                >
-                                                    <i class="fa-solid fa-trash"></i>
+                                                    class="btn btn-outline-info rounded-circle p-1"
+                                                    href="{{route('city.edit', [base64_encode($city->id)])}}">
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
-                                            </form>
+                                                <br>
+                                                <br>
+                                            @endforeach
+
+                                        </td>
+                                        <td>
+                                            @foreach($state->cities as $city)
+
+                                                <form id="deleteForm{{$city->id}}"
+                                                      action="{{ route('city.destroy', [base64_encode($city->id)]) }}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a
+                                                        class="btn btn-outline-danger btn-sm rounded-circle p-1"
+                                                        href="#"
+                                                        onclick="event.preventDefault();
+                                                           document.getElementById('deleteForm{{$city->id}}').submit();"
+                                                    >
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </form>
+                                                <br>
+                                            @endforeach
 
                                         </td>
 
@@ -80,13 +102,13 @@
                         </table>
                     </div>
                     <div class="pagination mt-4">
-                        <li class="page-item {{ $cites->onFirstPage() ? 'disabled' : '' }}">
+                        <li class="page-item {{ $states_with_cities->onFirstPage() ? 'disabled' : '' }}">
                             <a class="page-link"
-                               href="{{ $cites->previousPageUrl() }}">Previous</a>
+                               href="{{ $states_with_cities->previousPageUrl() }}">Previous</a>
                         </li>
 
-                        <li class="page-item {{ $cites->hasMorePages() ? '' : 'disabled' }}">
-                            <a class="page-link" href="{{ $cites->nextPageUrl() }}">Next</a>
+                        <li class="page-item {{ $states_with_cities->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $states_with_cities->nextPageUrl() }}">Next</a>
                         </li>
                     </div>
                 </div>

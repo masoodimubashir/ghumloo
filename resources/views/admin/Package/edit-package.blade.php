@@ -203,6 +203,8 @@
                                 role="switch"
                                 id="status"
                                 value="1"
+                                {{$package->status === 1 ? 'checked' : ''}}
+
                             >
                             <label class="form-check-label" for="status">Status</label>
                         </div>
@@ -215,6 +217,7 @@
                                 role="switch"
                                 id="popular"
                                 value="1"
+                                {{$package->popular === 1 ? 'checked' : ''}}
                             >
                             <label class="form-check-label" for="status">Popular</label>
                         </div>
@@ -385,7 +388,8 @@
                 type: 'GET',
                 success: function (response) {
 
-                    $(`#${city_id}`).html(response).prop('disabled', false);
+                    $(`#${city_id}`).html(response).prop('disabled', false).append(`<option>Select City</option>`);
+
 
                     response.forEach(function (city) {
 
@@ -408,6 +412,7 @@
                 success: function (response) {
 
                     $(`#${hotel_id}`).html(response).prop('disabled', false).append(`<option>Select Hotel</option>`);
+
 
                     response.forEach(function (city) {
                         city.forEach(hotel => {
